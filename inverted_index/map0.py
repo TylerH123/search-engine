@@ -1,18 +1,15 @@
-import os
+#!/usr/bin/env python3
 import sys
 
-current_dir = os.path.dirname(os.path.realpath(__file__))
-input_file = os.path.join(current_dir, 'input', 'input.csv')
 
 documents = 0
-with open(input_file, 'r') as f:
-  documents = len(f.readlines())
-
-print(documents)
+for line in sys.stdin:
+  documents += 1
 
 
+print(f'total_document_count\t {documents}')
 
-# """Map 0."""
+
 
 # #!/usr/bin/env python3
 # """Word count mapper."""
