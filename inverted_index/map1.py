@@ -30,6 +30,6 @@ for line in sys.stdin:
   # Remove all stop words
   terms = text.split()
   filtered_terms = list(filter(remove_stop_words, terms))
-  doc_body = " ".join(filtered_terms)
+  doc_body = ",".join(filtered_terms)
   print(f"{doc_id}\t{doc_body}")
   
