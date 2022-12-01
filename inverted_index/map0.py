@@ -1,14 +1,8 @@
 #!/usr/bin/env python3
 import sys
 
-
-documents = 0
 for line in sys.stdin:
-  documents += 1
-
-
-print(f'total_document_count\t {documents}')
-
+  print("doc\t1")
 
 
 # #!/usr/bin/env python3
