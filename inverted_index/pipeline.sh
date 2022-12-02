@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Example of how to chain MapReduce jobs together.  The output of one
 # job is the input to the next.
@@ -63,3 +63,17 @@ madoop \
   -output output4 \
   -mapper ./map4.py \
   -reducer ./reduce4.py
+
+# Job 5
+madoop \
+  -input output4 \
+  -output output5 \
+  -mapper ./map5.py \
+  -reducer ./reduce5.py
+
+# Job 5
+madoop \
+  -input output5 \
+  -output output6 \
+  -mapper ./map6.py \
+  -reducer ./reduce6.py

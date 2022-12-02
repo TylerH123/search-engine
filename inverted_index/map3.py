@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Word count mapper."""
-import csv
-import os
-import re
 import sys
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 for line in sys.stdin:
 	document = line.partition("\t")
-	key = document[0] + "," + document[2].strip()
-	print(f"{key}\t{1}")
+	document = [*document[0].split(','), document[2].strip()]
+	key = document[0]
+	print(f"{key}\t{','.join(document[1:])}")
