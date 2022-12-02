@@ -8,4 +8,4 @@ for line in sys.stdin:
 	val = doc[2].split(",")
 	term = val[0]
 	body = val[2] + " " + key + " " + val[1] + " " + val[3]
-	print(f"{term},{key}\t{body}")
+	print(f"{term},{int(key) % 3}\t{body}")
