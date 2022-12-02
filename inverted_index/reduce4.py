@@ -11,8 +11,7 @@ import math
 
 def get_total_documents(): 
 	with open("total_document_count.txt", "r") as file:
-		count = int(file.readline().strip())
-	return count
+		return int(file.readline().strip())
 
 
 def reduce_one_group(key, group):
@@ -20,13 +19,16 @@ def reduce_one_group(key, group):
 	num_documents = get_total_documents()
 	out = ""
 	for item in group:
-		val = item.partition("\t")
-		arr = val[2].split(",")
-		nk = int(arr[0]) 
+		val = item.partition("\t")[2].split(",")
+		nk = int(val[0]) 
 		inverse_freq = math.log(num_documents / nk, 10)
-		arr[0] = inverse_freq
-		for ele in arr:
-			out += str(ele).strip() + ","
+		if inverse_freq < 0: 
+			inverse_freq = 0.0
+		val[0] = inverse_freq
+		for i,ele in enumerate(val):
+			out += str(ele).strip() + " "
+			if (i+1) % 3 == 0: 
+				out += str(inverse_freq) + " "
 	print(f'{key}\t{out[:-1]}')
 
 

@@ -14,11 +14,11 @@ def reduce_one_group(key, group):
 	"""Reduce one group."""
 	count = 0
 	out = ""
-	num = random.randint(0,1000)
 	for item in group:
-		val = item.partition("\t")
-		count += 1
-		out += val[2].strip() + ','
+		val = item.partition("\t")[2].split(",")
+		freq = int(val[1])
+		count += freq
+		out += val[0] + ',' + str(freq) + ','
 	print(f'{key}\t{count},{out[:-1]}')
 
 
