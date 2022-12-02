@@ -15,8 +15,9 @@ def reduce_one_group(key, group):
 	for item in group:
 		val = item.strip().partition("\t")
 		arr = val[2].split(",")
+		idf = arr[0]
 		for i in range(1, len(arr), 2):
-			tf_idf_sq = math.pow(float(arr[i]) * int(arr[i+1]), 2)
+			tf_idf_sq = math.pow(int(arr[i+1]) * float(idf), 2)
 			out += f'{arr[i]},{arr[i+1]},{tf_idf_sq},'
 		print(f'{val[0]}\t{arr[0]},{out[:-1]}')
 
