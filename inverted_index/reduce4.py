@@ -27,8 +27,9 @@ def reduce_one_group(key, group):
 		val[0] = inverse_freq
 		for i,ele in enumerate(val):
 			out += str(ele).strip() + " "
-			if (i+1) % 3 == 0: 
-				out += str(inverse_freq) + " "
+			if i != 0 and i % 2 == 0: 
+				tf_idf = (inverse_freq * int(ele)) ** 2
+				out += str(tf_idf) + " " 
 	print(f'{key}\t{out[:-1]}')
 
 
