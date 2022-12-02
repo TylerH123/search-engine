@@ -6,20 +6,32 @@ https://github.com/eecs485staff/madoop/blob/main/README_Hadoop_Streaming.md
 """
 import sys
 import itertools
-import logging
-import random
+import math
+
+
+def get_total_documents(): 
+	with open("total_document_count.txt", "r") as file:
+		return int(file.readline().strip())
 
 
 def reduce_one_group(key, group):
 	"""Reduce one group."""
+	num_docs = get_total_documents()
 	count = 0
-	out = ""
+	doc_ids = {}
 	for item in group:
-		val = item.partition("\t")[2].split(",")
-		freq = int(val[1])
-		count += freq
-		out += val[0] + ',' + str(freq) + ','
-	print(f'{key}\t{count},{out[:-1]}')
+		val = item.strip().partition("\t")[2]
+		val_split = val.split(",")
+		id = int(val_split[0]) 
+		freq = int(val_split[2])
+		doc_ids[id] = [id, key, freq]
+		count += 1
+	for k, val in doc_ids.items(): 
+		idf = math.log10(num_docs / count)
+		if idf < 0: 
+			idf = 0.0
+		tf_idf = (val[2] * idf) ** 2
+		print(f"{k},{key}\t{val[2]},{idf},{tf_idf}")
 
 
 def keyfunc(line):

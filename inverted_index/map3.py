@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 for line in sys.stdin:
-	document = line.partition("\t")
-	document = [*document[0].split(','), document[2].strip()]
-	key = document[0]
-	print(f"{key}\t{','.join(document[1:])}")
+	doc = line.strip().partition("\t") 
+	key = doc[0].split(",") 
+	term = key[1]
+	print(f"{term}\t{doc[0]},{doc[2]}")

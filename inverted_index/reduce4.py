@@ -9,28 +9,20 @@ import itertools
 import math
 
 
-def get_total_documents(): 
-	with open("total_document_count.txt", "r") as file:
-		return int(file.readline().strip())
-
-
 def reduce_one_group(key, group):
 	"""Reduce one group."""
-	num_documents = get_total_documents()
-	out = ""
+	vals = []
+	norm_fac = 0
 	for item in group:
-		val = item.partition("\t")[2].split(",")
-		nk = int(val[0]) 
-		inverse_freq = math.log(num_documents / nk, 10)
-		if inverse_freq < 0: 
-			inverse_freq = 0.0
-		val[0] = inverse_freq
-		for i,ele in enumerate(val):
-			out += str(ele).strip() + " "
-			if i != 0 and i % 2 == 0: 
-				tf_idf = (inverse_freq * int(ele)) ** 2
-				out += str(tf_idf) + " " 
-	print(f'{key}\t{out[:-1]}')
+		val = item.strip().partition("\t")[2]
+		vals.append(val)
+		tf_idf = float(val.split(",")[-1])
+		norm_fac += tf_idf
+	for val in vals: 
+		arr = val.split(",")
+		arr[-1] = str(norm_fac)
+		out = ",".join(arr)
+		print(f'{key}\t{out}')
 
 
 def keyfunc(line):
