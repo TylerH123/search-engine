@@ -11,9 +11,14 @@ import math
 
 def reduce_one_group(key, group):
 	"""Reduce one group."""
+	out = ''
+	summation = 0
 	for item in group:
-		print(item.strip())
-
+		val = item.strip().partition('\t')
+		arr = val[2].split(',')
+		summation += float(arr[4])
+		out += f'{val[2]} '
+	print(f'{key}\t{summation} {out}')
 
 
 def keyfunc(line):
