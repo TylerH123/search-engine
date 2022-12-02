@@ -3,4 +3,9 @@
 import sys
 
 for line in sys.stdin:
-	print(line.strip())
+	doc = line.strip().partition("\t")
+	key = doc[0]
+	val = doc[2].split(",")
+	term = val[0]
+	body = val[2] + " " + key + " " + val[1] + " " + val[3]
+	print(f"{term}\t{body}")
