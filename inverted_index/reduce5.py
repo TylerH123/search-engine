@@ -16,7 +16,7 @@ def reduce_one_group(key, group):
         doc = line.strip().partition("\t")[2].split(" ")
         term = doc[0]
         if term in term_docs:
-            term_docs[term] += " ".join(doc[2:])
+            term_docs[term] += " " + " ".join(doc[2:])
         else:
             term_docs[term] = " ".join(doc[1:])
     for k,val in term_docs.items(): 
