@@ -2,13 +2,19 @@ import flask
 import index
 import os
 
-def load_index(inverted_index):
+def load_index(inverted_index, pagerank):
   index_path = index.app.config['INDEX_PATH']
   index_path = os.getcwd() + "/index/inverted_index/" + index_path
   with open(index_path, "r") as file:
     for line in file:
       line = line.split(" ")
       inverted_index[line[0]] = (" ".join(line[1:])).strip()
+  pagerank_path = os.getcwd + "/index/pagerank.out"
+  with open(pagerank_path, "r"):
+    for line in file: 
+      line = line.strip().partition(",")
+      pagerank[int(line[0])] = float(line[2])
+
 
 @index.app.route('/api/v1/')
 def get_api():
@@ -36,6 +42,7 @@ def get_hits():
     'hits': []
   }
   return flask.jsonify(**context), 200
+
 
 # @index.app.route('/api/test/')
 # def test():
