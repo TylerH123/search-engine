@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Example of how to chain MapReduce jobs together.  The output of one
 # job is the input to the next.
