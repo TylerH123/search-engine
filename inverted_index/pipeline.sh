@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Example of how to chain MapReduce jobs together.  The output of one
 # job is the input to the next.
@@ -12,7 +12,7 @@
 
 # Stop on errors
 # See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
-# set -Eeuo pipefail
+set -Eeuo pipefail
 
 # Optional input directory argument
 PIPELINE_INPUT=input
