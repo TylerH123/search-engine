@@ -64,30 +64,9 @@ madoop \
   -mapper ./map4.py \
   -reducer ./reduce4.py
 
-# # Job 5
-# madoop \
-#   -input output4 \
-#   -output output5 \
-#   -mapper ./map5.py \
-#   -reducer ./reduce5.py
-
-# # Job 6
-# madoop \
-#   -input output5 \
-#   -output output6 \
-#   -mapper ./map6.py \
-#   -reducer ./reduce6.py
-
-# # Job 7
-# madoop \
-#   -input output6 \
-#   -output output7 \
-#   -mapper ./map7.py \
-#   -reducer ./reduce7.py
-
-# # Job 8
-# madoop \
-#   -input output7 \
-#   -output output8 \
-#   -mapper ./map8.py \
-#   -reducer ./reduce8.py
+# Job 5
+madoop \
+  -input output4 \
+  -output output \
+  -mapper ./map5.py \
+  -reducer ./reduce5.py
