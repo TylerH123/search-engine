@@ -5,8 +5,9 @@ app = flask.Flask(__name__)
 
 import index.api
 
+inverted_index = {}
 app.config['INDEX_PATH'] = os.getenv('INDEX_PATH', 'inverted_index_1.txt')
-index.api.load_index()
+index.api.load_index(inverted_index)
 
 
 
