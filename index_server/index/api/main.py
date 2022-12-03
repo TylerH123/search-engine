@@ -1,9 +1,9 @@
 import flask
 import index
-import os
 
 def load_index():
-  inverted_index = index.app.config['INDEX_PATH']
+  index_path = index.app.config['INDEX_PATH']
+  
   return
 
 @index.app.route('/api/v1/')
