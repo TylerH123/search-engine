@@ -28,9 +28,9 @@
 
 .pagerank_weight {
   position: absolute;
-  width: 120px;
+  width: 240px;
   height: 12px;
-  left: 1200px;
+  left: 1128px;
   top: 120px;
 
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -125,7 +125,7 @@ input[type=submit] {
   width: 240px;
   height: 36px;
   left: 1080px;
-  top: 64px;
+  top: 48px;
 
   color: #FFFFFF;
   background: #E72A85;
@@ -145,7 +145,7 @@ input[type=range] {
   -webkit-appearance: none;
   position: absolute;
   left: 1080px;
-  top: 120px;
+  top: 160px;
   width: 240px;
 }
 

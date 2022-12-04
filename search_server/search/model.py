@@ -29,3 +29,14 @@ def close_db(error):
     if sqlite_db is not None:
         sqlite_db.commit()
         sqlite_db.close()
+
+
+def get_document(docid):
+    connection = get_db()
+    cur = connection.execute(
+        'SELECT * '
+        'FROM Documents '
+        'WHERE docid = ?',
+        (docid, )
+    )
+    return cur.fetchone()
