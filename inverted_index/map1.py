@@ -5,9 +5,9 @@ import os
 import re
 import sys
 
+
 # For documents with very large doc_body
 csv.field_size_limit(sys.maxsize)
-
 stop_words = set() 
 current_dir = os.path.dirname(__file__)
 with open(os.path.join(current_dir ,'stopwords.txt'), 'r') as f:

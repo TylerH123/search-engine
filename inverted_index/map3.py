@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """Word count mapper."""
 import sys
-import logging
 
-logging.basicConfig(level=logging.DEBUG)
 
 for line in sys.stdin:
 	doc = line.strip().partition("\t") 

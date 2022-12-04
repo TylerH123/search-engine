@@ -19,19 +19,19 @@ def reduce_one_group(key, group):
 	num_docs = get_total_documents()
 	count = 0
 	doc_ids = {}
+	# key to this group is the term
 	for item in group:
-		val = item.strip().partition("\t")[2]
-		val_split = val.split(",")
-		id = int(val_split[0]) 
-		freq = int(val_split[2])
-		doc_ids[id] = [id, key, freq]
+		val = item.strip().partition("\t")[2].split(",")
+		id = int(val[0]) 
+		freq = int(val[2])
+		doc_ids[id] = [key, freq]
 		count += 1
 	for k, val in doc_ids.items(): 
-		idf = math.log10(num_docs / count)
-		if idf < 0: 
+		idf = math.log(num_docs / count, 10)
+		if idf <= 0: 
 			idf = 0.0
-		tf_idf = (val[2] * idf) ** 2
-		print(f"{k},{key}\t{val[2]},{idf},{tf_idf}")
+		tf_idf = (val[1] * idf) ** 2
+		print(f"{k}\t{key},{val[1]},{idf},{tf_idf}")
 
 
 def keyfunc(line):

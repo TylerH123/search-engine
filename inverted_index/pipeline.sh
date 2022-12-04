@@ -70,3 +70,5 @@ madoop \
   -output output \
   -mapper ./map5.py \
   -reducer ./reduce5.py
+
+# madoop -input output2 -output out_test -mapper ./map3.py -reducer ./reduce3.py

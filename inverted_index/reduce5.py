@@ -12,7 +12,9 @@ import collections
 def reduce_one_group(key, group):
     """Reduce one group."""
     term_docs = {}
+    # print("---------------------------------------")
     for line in group:
+        # print(line.strip().partition("\t")[2].split(" "))
         doc = line.strip().partition("\t")[2].split(" ")
         term = doc[0]
         if term in term_docs:

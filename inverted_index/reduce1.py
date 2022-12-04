@@ -11,8 +11,7 @@ import itertools
 def reduce_one_group(key, group):
     """Reduce one group."""
     for item in group:
-        doc = item.partition("\t")[2].strip()
-        print(f'{key}\t{doc}')
+        print(f'{item.strip()}')
 
 
 def keyfunc(line):
