@@ -5,6 +5,7 @@ import os
 import re
 from math import sqrt
 
+
 def load_index(inverted_index, pagerank):
   index_path = index.app.config['INDEX_PATH']
   index_path = os.getcwd() + "/index_server/index/inverted_index/" + index_path
@@ -33,9 +34,15 @@ def get_api():
 def get_hits():
   """Return hits from query."""
   query = flask.request.args.get('q')
-  weight = flask.request.args.get('w') or 0.5
+  weight = float(flask.request.args.get('w', 0.5))
   hits = []
   query_terms_list = clean_query(query)
+  for term in query_terms_list:
+    if term not in index.inverted_index:
+      context = {
+        'hits': hits
+      }
+      return flask.jsonify(**context), 200
   process_query(query_terms_list, hits, weight)
   hits.sort(key=lambda x: x['score'], reverse=True)
   context = {
@@ -73,7 +80,7 @@ def process_query(query, hits, weight):
     dot_prod = dot(query_vec, doc_vec)
     norm_d = sqrt(norm_fac[doc_id])
     tfidf = dot_prod / (norm_q * norm_d)
-    score = weight * index.pagerank[868657] \
+    score = weight * index.pagerank[doc_id] \
             + (1 - weight) * (tfidf)
     out = {}
     out["docid"] = doc_id
@@ -83,7 +90,7 @@ def process_query(query, hits, weight):
 
 def get_resulting_docs(terms, idf, tf, nf):
   result_set = []
-  for word in terms: 
+  for word in terms:
     result = set()
     docs = index.inverted_index[word]
     docs = docs.split(" ")

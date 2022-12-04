@@ -30,7 +30,7 @@ def reduce_one_group(key, group):
 		idf = math.log(num_docs / count, 10)
 		if idf <= 0: 
 			idf = 0.0
-		tf_idf = (val[1] * idf) ** 2
+		tf_idf = math.pow(val[1] * idf, 2)
 		print(f"{k}\t{key},{val[1]},{idf},{tf_idf}")
 
 

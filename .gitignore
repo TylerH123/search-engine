@@ -17,9 +17,9 @@ starter_files.tar.xz
 /hello_css/html/
 
 # EECS 485 Project 2
-*.pem
-*.db
-var/
+# *.pem
+# *.db
+# var/
 
 # EECS 485 Project 3
 node_modules/
