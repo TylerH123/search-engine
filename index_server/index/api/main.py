@@ -35,10 +35,9 @@ def get_hits():
   query = flask.request.args.get('q')
   weight = flask.request.args.get('w') or 0.5
   hits = []
-  
   query_terms_list = clean_query(query)
   process_query(query_terms_list, hits, weight)
-
+  hits.sort(key=lambda x: x['score'], reverse=True)
   context = {
     'hits': hits
   }
@@ -50,10 +49,10 @@ def remove_stop_words(word):
 
 
 def clean_query(query):
-    text = re.sub(r"[^a-zA-Z0-9 ]+", "", query).casefold()
-    terms = text.split()
-    filtered_terms = list(filter(remove_stop_words, terms))
-    return filtered_terms
+  text = re.sub(r"[^a-zA-Z0-9 ]+", "", query).casefold()
+  terms = text.split()
+  filtered_terms = list(filter(remove_stop_words, terms))
+  return filtered_terms
 
 
 def process_query(query, hits, weight):
@@ -134,8 +133,3 @@ def get_norm(vec):
   for val in vec: 
     result += val ** 2
   return sqrt(result)
-
-# @index.app.route('/api/test/')
-# def test():
-#   """Return hits from query."""
-#   return flask.jsonify(index.inverted_index), 200
