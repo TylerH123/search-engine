@@ -35,6 +35,7 @@ def get_hits():
   weight = flask.request.args.get('w') or 0.5
   hits = []
   process_query(query, hits, weight)
+  hits.sort(key=lambda x: x['score'], reverse=True)
   context = {
     'hits': hits
   }
@@ -120,8 +121,3 @@ def get_norm(vec):
   for val in vec: 
     result += val ** 2
   return sqrt(result)
-
-# @index.app.route('/api/test/')
-# def test():
-#   """Return hits from query."""
-#   return flask.jsonify(index.inverted_index), 200
