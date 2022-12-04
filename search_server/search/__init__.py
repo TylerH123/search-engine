@@ -7,5 +7,5 @@ app.config.from_object('search.config')
 import search.views
 import search.model
 
-# flask --app search run --host 0.0.0.0 --port 8000
+# flask --app search --debug run --host 0.0.0.0 --port 8000
 # export FLASK_DEBUG=1

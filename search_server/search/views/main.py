@@ -1,5 +1,6 @@
 import flask
 import heapq
+import json
 import os
 import search
 import requests
@@ -13,16 +14,19 @@ def show_index():
     query_phrase = flask.request.args.get('q')
     pagerank_weight = flask.request.args.get('w')
 
-    context = {}
+    context = {
+        'phrase': query_phrase or '',
+        'weight': pagerank_weight or '0.5'
+    }
 
     if query_phrase:
         query = {
-            query_phrase: query_phrase,
-            pagerank_weight: pagerank_weight
+            'q': query_phrase,
+            'w': pagerank_weight
         }
         results = send_query(query)
         context['results'] = results
-
+    
     return flask.render_template('index.html', **context)
 
 
@@ -41,10 +45,10 @@ def send_query(query):
     for thread in threads:
         thread.join()
 
-    result_docid_list = list(heapq.merge(*combined_responses))
-
+    result_docid_list = list(heapq.merge(*combined_responses, key=lambda x: x['score'], reverse=True))
     results = []
-    for docid in result_docid_list:
+    for document in result_docid_list[:10]:
+        docid = document['docid']
         results.append(search.model.get_document(docid))
 
     return results
@@ -52,21 +56,6 @@ def send_query(query):
 
 def request_to_server(server, query, combined_responses):
     """Send request with query to server and process response."""
-    try:
-        # response = requests.get(server, params=query).json()
-        # hits = response.get('hits')
-        hits = [
-            {
-                "docid": 7279265,
-                "score": 0.17852494237501587
-            },
-            {
-                "docid": 32189768,
-                "score": 0.17415374191738828
-            },
-        ]
-        output = [item['docid'] for item in hits]
-        combined_responses.append(output)
-
-    except:
-        print(f'Error when sending request to {server}')
+    response = requests.get(server, params=query).json()
+    hits = response.get('hits')
+    combined_responses.append(hits)

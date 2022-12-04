@@ -9,7 +9,7 @@ usage() {
 create() {
   if [ -f "var/search.sqlite3" ]; then
     echo "Error: database already exists"
-    exit
+    exit 1
   fi
   echo "mkdir -p var/"
   mkdir -p var/
