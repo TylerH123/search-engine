@@ -1,0 +1,17 @@
+#!/bin/bash
+
+tar \
+  -cJvf submit.tar.xz \
+  --exclude '*__pycache__*' \
+  --exclude '*.out' \
+  --exclude '*.sql' \
+  --exclude '*.sqlite3' \
+  --exclude '*.jar' \
+  --exclude '*.egg-info' \
+  --exclude '*var*' \
+  --exclude '*tmp*' \
+  --exclude '*/part-*' \
+  bin \
+  inverted_index/{map*.py,reduce*.py,pipeline.sh} \
+  index_server \
+  search_server
