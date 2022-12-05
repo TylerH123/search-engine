@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
+"""Inverted index mapper."""
 import sys
 
 
 for line in sys.stdin:
-  print("doc\t1")
-  
+    print("doc\t1")

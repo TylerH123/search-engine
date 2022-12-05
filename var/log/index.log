@@ -1,22 +1,12 @@
- * Serving Flask app 'index'
- * Debug mode: off
-[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:9000
- * Running on http://172.28.54.93:9000
-[33mPress CTRL+C to quit[0m
- * Serving Flask app 'index'
- * Debug mode: off
- * Serving Flask app 'index'
- * Debug mode: off
-[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:9001
- * Running on http://172.28.54.93:9001
-[33mPress CTRL+C to quit[0m
-[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:9002
- * Running on http://172.28.54.93:9002
-[33mPress CTRL+C to quit[0m
-127.0.0.1 - - [04/Dec/2022 15:50:10] "GET /api/v1/hits/?q=little+^@@seba@@stian&w=0 HTTP/1.1" 200 -
+Usage: flask run [OPTIONS]
+Try 'flask run --help' for help.
+
+Usage: flask run [OPTIONS]
+Try 'flask run --help' for help.
+
+Error: Failed to find Flask application or factory in module 'index'. Use 'index:name' to specify one.
+Error: Failed to find Flask application or factory in module 'index'. Use 'index:name' to specify one.
+Usage: flask run [OPTIONS]
+Try 'flask run --help' for help.
+
+Error: Failed to find Flask application or factory in module 'index'. Use 'index:name' to specify one.

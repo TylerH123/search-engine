@@ -1,3 +1,4 @@
+"""Database related function for search server."""
 import sqlite3
 import flask
 import search
@@ -5,6 +6,7 @@ import search
 
 def dict_factory(cursor, row):
     """Convert database row objects to a dictionary keyed on column name.
+
     This is useful for building dictionaries which are then used to render a
     template.  Note that this would be inefficient for large queries.
     """
@@ -32,6 +34,7 @@ def close_db(error):
 
 
 def get_document(docid):
+    """Get document."""
     connection = get_db()
     cur = connection.execute(
         'SELECT * '

@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
-"""
-Template reducer.
-
-https://github.com/eecs485staff/madoop/blob/main/README_Hadoop_Streaming.md
-"""
+"""Inverted index reducer."""
 import sys
 import itertools
-import collections
 
 
 def reduce_one_group(key, group):
     """Reduce one group."""
+    assert key
     term_docs = {}
     # print("---------------------------------------")
     for line in group:
@@ -21,7 +17,7 @@ def reduce_one_group(key, group):
             term_docs[term] += " " + " ".join(doc[2:])
         else:
             term_docs[term] = " ".join(doc[1:])
-    for k,val in term_docs.items(): 
+    for k, val in term_docs.items():
         print(f"{k} {val}")
 
 
@@ -31,9 +27,9 @@ def keyfunc(line):
 
 
 def main():
-	"""Divide sorted lines into groups that share a key."""
-	for key, group in itertools.groupby(sys.stdin, keyfunc):
-		reduce_one_group(key, group)
+    """Divide sorted lines into groups that share a key."""
+    for key, group in itertools.groupby(sys.stdin, keyfunc):
+        reduce_one_group(key, group)
 
 
 if __name__ == "__main__":

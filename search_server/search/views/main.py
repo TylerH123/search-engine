@@ -1,9 +1,10 @@
-import flask
+"""Flask routes for search server."""
 import heapq
-import os
-import search
-import requests
 import threading
+import flask
+import requests
+
+import search
 import search.model
 
 
@@ -52,21 +53,7 @@ def send_query(query):
 
 def request_to_server(server, query, combined_responses):
     """Send request with query to server and process response."""
-    try:
-        # response = requests.get(server, params=query).json()
-        # hits = response.get('hits')
-        hits = [
-            {
-                "docid": 7279265,
-                "score": 0.17852494237501587
-            },
-            {
-                "docid": 32189768,
-                "score": 0.17415374191738828
-            },
-        ]
-        output = [item['docid'] for item in hits]
-        combined_responses.append(output)
-
-    except:
-        print(f'Error when sending request to {server}')
+    response = requests.get(server, params=query, timeout=10).json()
+    hits = response.get('hits')
+    output = [item['docid'] for item in hits]
+    combined_responses.append(output)
