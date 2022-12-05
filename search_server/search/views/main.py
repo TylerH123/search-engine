@@ -14,12 +14,15 @@ def show_index():
     query_phrase = flask.request.args.get('q')
     pagerank_weight = flask.request.args.get('w')
 
-    context = {}
+    context = {
+        'phrase': query_phrase or '',
+        'weight': pagerank_weight or '0.5'
+    }
 
     if query_phrase:
         query = {
-            query_phrase: query_phrase,
-            pagerank_weight: pagerank_weight
+            'q': query_phrase,
+            'w': pagerank_weight
         }
         results = send_query(query)
         context['results'] = results
@@ -42,10 +45,11 @@ def send_query(query):
     for thread in threads:
         thread.join()
 
-    result_docid_list = list(heapq.merge(*combined_responses))
-
+    result_docid_list = list(heapq.merge(
+        *combined_responses, key=lambda x: x['score'], reverse=True))
     results = []
-    for docid in result_docid_list:
+    for document in result_docid_list[:10]:
+        docid = document['docid']
         results.append(search.model.get_document(docid))
 
     return results
@@ -55,5 +59,4 @@ def request_to_server(server, query, combined_responses):
     """Send request with query to server and process response."""
     response = requests.get(server, params=query, timeout=10).json()
     hits = response.get('hits')
-    output = [item['docid'] for item in hits]
-    combined_responses.append(output)
+    combined_responses.append(hits)

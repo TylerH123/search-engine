@@ -4,6 +4,13 @@ set -Eeuo pipefail
 
 
 start() {
+    set +o pipefail
+    NPROCS=$(pgrep -f "flask --app index run --host 0.0.0.0 --port 900[0-2]" | wc -l)
+    set -o pipefail
+    if [ "$NPROCS" -eq 3 ]; then
+        echo "Error: index server is already running"
+        exit 1
+    fi
     echo "starting index server ..."
     set -x
     mkdir -p var/log
